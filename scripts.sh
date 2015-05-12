@@ -2,12 +2,10 @@ function install_hxcpp {
   if [[ $TRAVIS_HAXE_VERSION == "development" ]]; then
     git clone https://github.com/HaxeFoundation/hxcpp.git;
     haxelib dev hxcpp ./hxcpp;
-    (
-      cd hxcpp/tools/hxcpp;
-      haxe compile.hxml default || true;
-      cd ../../project;
-      neko build.n || true;
-    ) || true;
+    cd hxcpp/tools/hxcpp;
+    haxe compile.hxml;
+    cd ../../project;
+    neko build.n default;
   fi
   if [[ $TRAVIS_HAXE_VERSION == "3.2.0" ]]; then
     haxelib install hxcpp 3.2.94;
