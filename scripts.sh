@@ -4,9 +4,9 @@ function install_hxcpp {
     haxelib dev hxcpp ./hxcpp;
     (
       cd hxcpp/tools/hxcpp;
-      haxe compile.hxml || true;
-      cd ../../project;
-      neko build.n || true
+      haxe compile.hxml default || true;
+      #cd ../../project; # not needed?
+      #neko build.n || true
     );
   fi
   if [[ $TRAVIS_HAXE_VERSION == "3.2.0" ]]; then
