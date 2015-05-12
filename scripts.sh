@@ -6,7 +6,7 @@ function install_hxcpp {
     haxe compile.hxml;
     cd ../../project;
     neko build.n;
-    cd ../../;
+    cd $HOME;
   fi
   if [ $TRAVIS_HAXE_VERSION == "3.2.0" ]; then
     haxelib install hxcpp 3.2.94;
@@ -29,4 +29,15 @@ function install_hxcs {
   if [ $TRAVIS_HAXE_VERSION == "3.2.0" ]; then
     haxelib install hxcs 3.2.0;
   fi
+}
+
+function install_flashplayer {
+  wget http://fpdownload.macromedia.com/pub/flashplayer/updaters/11/flashplayer_11_sa_debug.i386.tar.gz
+  sudo apt-get install libgtk2.0-0:i386 libxt6:i386 libnss3:i386 libcurl3:i386
+  [ -f /etc/init.d/xvfb ] || sudo apt-get install xvfb
+  tar -xf flashplayer* -C $HOME/
+}
+
+function run_flash {
+  xvfb-run -a $HOME/flashplayerdebugger "$@"
 }
