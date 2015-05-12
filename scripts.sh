@@ -40,5 +40,5 @@ function install_flashplayer {
 }
 
 function run_flash {
-  xvfb-run -a $HOME/flashplayerdebugger "$@"
+  xvfb-run -extension RANDR -a $HOME/flashplayerdebugger "$@"
 }
