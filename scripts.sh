@@ -6,7 +6,7 @@ function install_hxcpp {
     haxe compile.hxml;
     cd ../../project;
     neko build.n;
-    cd $HOME;
+    cd ../../;
   fi
   if [ $TRAVIS_HAXE_VERSION == "3.2.0" ]; then
     haxelib install hxcpp 3.2.94;
