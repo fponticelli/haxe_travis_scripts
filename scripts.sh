@@ -85,6 +85,9 @@ function run_flash {
     fi
     echo -n "."
     sleep 2
+    echo "-----------------------"
+    cat "$FLASHLOGPATH"
+    echo "======================="
   done
   echo
   cat "$FLASHLOGPATH"
