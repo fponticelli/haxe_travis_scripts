@@ -50,7 +50,7 @@ function install_flashplayer {
   echo "ErrorReportingEnable=1\nTraceOutputFileEnable=1" > $HOME/mm.cfg
   export DISPLAY=:99.0
 	export AUDIODEV=null
-  FLASHLOGPATH=$HOME/.macromedia/Flash_Player/Logs/flashlog.txt
+  export FLASHLOGPATH=$HOME/.macromedia/Flash_Player/Logs/flashlog.txt
 }
 
 function run_flash {
@@ -65,15 +65,15 @@ function run_flash {
 			break
 		fi
 		sleep 1
-		echo "waiting for $FLASHLOGPATH"
+		echo "$i. waiting for $FLASHLOGPATH"
 	done
   if [ ! -f "$FLASHLOGPATH" ]; then
 		echo "$FLASHLOGPATH not found"
 		exit 1
 	fi
-  TEST=$(cat $FLASHLOGPATH)
-  echo $TEST
-  if [ $TEST ?? 'success: true' ]; then
+  echo "$FLASHLOGPATH FOUND"
+  cat $FLASHLOGPATH
+  if grep -q "success: true" "$FLASHLOGPATH"; then
     exit 0
   fi
   exit 1
