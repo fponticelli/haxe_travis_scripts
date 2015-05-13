@@ -72,11 +72,7 @@ function run_flash {
 		exit 1
 	fi
   #mkfifo /tmp/flash-fifo
-	tail -f "$FLASHLOGPATH" > /tmp/flash-fifo &
-	$EVAL_TEST_CMD < /tmp/flash-fifo || exit 1
-  echo "FLASHLOGPATH FOUND"
-  tail "$FLASHLOGPATH"
-  echo "EVAL_TEST_CMD"
-  echo "$EVAL_TEST_CMD"
-  exit $EVAL_TEST_CMD
+  TEST=$(cat $FLASHLOGPATH)
+  "echo \$TEST"
+  exit [ $TEST ?? 'success: true' ]
 }
