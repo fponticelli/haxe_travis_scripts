@@ -5,10 +5,13 @@ function install_hxcpp {
     cd hxcpp/tools/hxcpp;
     haxe compile.hxml;
     cd ../../project;
-    neko build.n linux-x86_64;
+    neko build.n default;
   fi
   if [[ $TRAVIS_HAXE_VERSION == "3.2.0" ]]; then
     haxelib install hxcpp 3.2.94;
+  fi
+  if [[ $TRAVIS_HAXE_VERSION == "3.1.3" ]]; then
+    haxelib install hxcpp 3.1.68;
   fi
 }
 
@@ -19,6 +22,9 @@ function install_hxjava {
   if [[ $TRAVIS_HAXE_VERSION == "3.2.0" ]]; then
     haxelib install hxjava 3.2.0;
   fi
+  if [[ $TRAVIS_HAXE_VERSION == "3.1.3" ]]; then
+    haxelib install hxjava 3.1.0;
+  fi
 }
 
 function install_hxcs {
@@ -27,6 +33,9 @@ function install_hxcs {
   fi
   if [[ $TRAVIS_HAXE_VERSION == "3.2.0" ]]; then
     haxelib install hxcs 3.2.0;
+  fi
+  if [[ $TRAVIS_HAXE_VERSION == "3.1.3" ]]; then
+    haxelib install hxcs 3.1.1;
   fi
 }
 
