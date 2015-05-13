@@ -67,7 +67,6 @@ function run_flash {
     echo -n "."
 		sleep 1
 	done
-  sudo killall "Flash Player Debugger"
   echo
   if [ ! -f "$FLASHLOGPATH" ]; then
 		echo "$FLASHLOGPATH not found"
@@ -77,20 +76,19 @@ function run_flash {
   echo -n "FOUND $FLASHLOGPATH"
   local CODE=1
   for i in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20; do
-    if grep -Fq "ALL TESTS OK" "$FLASHLOGPATH"
-    then
+    if grep -Fq "ALL TESTS OK" "$FLASHLOGPATH"; then
       CODE=0
       break
-    end
-    if grep -Fq "fail" "$FLASHLOGPATH"
-    then
+    fi
+    if grep -Fq "fail" "$FLASHLOGPATH"; then
       break
-    end
+    fi
     echo -n "."
     sleep 2
   done
+  echo
   cat "$FLASHLOGPATH"
-  if $CODE then
+  if [ $CODE ] then
     exit 1
   fi
 }
