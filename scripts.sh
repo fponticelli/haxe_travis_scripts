@@ -1,11 +1,14 @@
 function install_hxcpp {
   if [[ $TRAVIS_HAXE_VERSION == "development" ]]; then
-    git clone https://github.com/HaxeFoundation/hxcpp.git;
-    haxelib dev hxcpp ./hxcpp;
-    cd hxcpp/tools/hxcpp;
-    haxe compile.hxml;
-    cd ../../project;
-    neko build.n default;
+    (
+      cd $HOME
+      git clone https://github.com/HaxeFoundation/hxcpp.git
+      haxelib dev hxcpp ./hxcpp
+      cd hxcpp/tools/hxcpp
+      haxe compile.hxml
+      cd ../../project
+      neko build.n default
+    )
   fi
   if [[ $TRAVIS_HAXE_VERSION == "3.2.0" ]]; then
     haxelib install hxcpp 3.2.94;
@@ -47,5 +50,5 @@ function install_flashplayer {
 }
 
 function run_flash {
-  xvfb-run -extension RANDR -a $HOME/flashplayerdebugger "$@"
+  xvfb-run -a $HOME/flashplayerdebugger "$@"
 }
