@@ -47,8 +47,33 @@ function install_flashplayer {
   sudo apt-get install libgtk2.0-0:i386 libxt6:i386 libnss3:i386 libcurl3:i386
   [ -f /etc/init.d/xvfb ] || sudo apt-get install xvfb
   tar -xf flashplayer* -C $HOME/
+  echo "ErrorReportingEnable=1\nTraceOutputFileEnable=1" > $HOME/mm.cfg
+  export DISPLAY=:99.0
+	export AUDIODEV=null
+  FLASHLOGPATH=$HOME/.macromedia/Flash_Player/Logs/flashlog.txt
 }
 
 function run_flash {
-  xvfb-run -a $HOME/flashplayerdebugger "$@"
+  sudo killall "Flash Player Debugger"
+	killall tail
+	rm -f /tmp/flash-fifo
+	rm -f "$FLASHLOGPATH"
+  xvfb-run -a $HOME/flashplayerdebugger "$@" &
+  for i in 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20; do
+		sudo chmod 777 "$FLASHLOGPATH"
+		if [ -f "$FLASHLOGPATH" ]; then
+			break
+		fi
+		sleep 1
+		echo "waiting for $FLASHLOGPATH"
+	done
+  if [ ! -f "$FLASHLOGPATH" ]; then
+		echo "$FLASHLOGPATH not found"
+		exit 1
+	fi
+  mkfifo /tmp/flash-fifo
+	tail -f "$FLASHLOGPATH" > /tmp/flash-fifo &
+	$EVAL_TEST_CMD < /tmp/flash-fifo || exit 1
+  echo $EVAL_TEST_CMD
+  exit $EVAL_TEST_CMD
 }
