@@ -1,17 +1,13 @@
 function install_hxcpp {
   if [[ $TRAVIS_HAXE_VERSION == "development" ]]; then
     (
-      cd $HOME
-      git clone https://github.com/HaxeFoundation/hxcpp.git
-      haxelib dev hxcpp ./hxcpp
-      cd hxcpp/tools/hxcpp
-      haxe compile.hxml
-      cd ../../project
-      neko build.n default
+      haxelib git hxcpp https://github.com/HaxeFoundation/hxcpp.git
+      cd $(haxelib path hxcpp | head -1)tools/hxcpp && haxe compile.hxml
+      cd $(haxelib path hxcpp | head -1)project && neko build.n linux-m64
     )
   fi
   if [[ $TRAVIS_HAXE_VERSION == "3.2.0" ]]; then
-    haxelib install hxcpp 3.2.94;
+    haxelib install hxcpp;
   fi
   if [[ $TRAVIS_HAXE_VERSION == "3.1.3" ]]; then
     haxelib install hxcpp 3.1.68;
@@ -23,7 +19,7 @@ function install_hxjava {
     haxelib git hxjava https://github.com/HaxeFoundation/hxjava.git;
   fi
   if [[ $TRAVIS_HAXE_VERSION == "3.2.0" ]]; then
-    haxelib install hxjava 3.2.0;
+    haxelib install hxjava;
   fi
   if [[ $TRAVIS_HAXE_VERSION == "3.1.3" ]]; then
     haxelib install hxjava 3.1.0;
@@ -35,7 +31,7 @@ function install_hxcs {
     haxelib git hxcs https://github.com/HaxeFoundation/hxcs.git;
   fi
   if [[ $TRAVIS_HAXE_VERSION == "3.2.0" ]]; then
-    haxelib install hxcs 3.2.0;
+    haxelib install hxcs;
   fi
   if [[ $TRAVIS_HAXE_VERSION == "3.1.3" ]]; then
     haxelib install hxcs 3.1.1;
