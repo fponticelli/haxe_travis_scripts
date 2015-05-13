@@ -51,6 +51,8 @@ function install_flashplayer {
   export DISPLAY=:99.0
 	export AUDIODEV=null
   export FLASHLOGPATH=$HOME/.macromedia/Flash_Player/Logs/flashlog.txt
+  sh -e /etc/init.d/xvfb start
+  sleep 3
 }
 
 function run_flash {
