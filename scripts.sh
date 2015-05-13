@@ -76,11 +76,11 @@ function run_flash {
   echo -n "FOUND $FLASHLOGPATH"
   local CODE=1
   for i in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20; do
-    if [ grep -Fq "ALL TESTS OK" "$FLASHLOGPATH" ]; then
+    if grep -Fq "ALL TESTS OK" "$FLASHLOGPATH"; then
       CODE=0
       break
     fi
-    if [ grep -Fq "fail" "$FLASHLOGPATH" ]; then
+    if grep -Fq "fail" "$FLASHLOGPATH"; then
       break
     fi
     echo -n "."
