@@ -67,6 +67,7 @@ function run_flash {
     echo -n "."
 		sleep 1
 	done
+  sudo killall "Flash Player Debugger"
   echo
   if [ ! -f "$FLASHLOGPATH" ]; then
 		echo "$FLASHLOGPATH not found"
@@ -74,11 +75,12 @@ function run_flash {
 	fi
 	sudo chmod 777 "$FLASHLOGPATH"
   echo "FOUND $FLASHLOGPATH"
-  #cat "$FLASHLOGPATH"
-  if grep -Fq " ALL TESTS OK" "$FLASHLOGPATH"
-  then
+  grep -F "ALL TESTS OK" "$FLASHLOGPATH"
+  cat "$FLASHLOGPATH"
+  #if grep -Fq "ALL TESTS OK" "$FLASHLOGPATH"
+  #then
     exit 0
-  else
-    exit 1
-  fi
+  #else
+  #  exit 1
+  #fi
 }
