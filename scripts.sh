@@ -59,20 +59,21 @@ function run_flash {
 	rm -f /tmp/flash-fifo
 	rm -f "$FLASHLOGPATH"
   xvfb-run -a $HOME/flashplayerdebugger "$@" &
-  for i in 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20; do
-		sudo chmod 777 "$FLASHLOGPATH"
+	echo "waiting for $FLASHLOGPATH "
+  for i in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20; do
 		if [ -f "$FLASHLOGPATH" ]; then
 			break
 		fi
+    echo "\b$i ..."
 		sleep 1
-		echo "$i. waiting for $FLASHLOGPATH"
 	done
   if [ ! -f "$FLASHLOGPATH" ]; then
 		echo "$FLASHLOGPATH not found"
 		exit 1
 	fi
-  echo "$FLASHLOGPATH FOUND"
-  cat $FLASHLOGPATH
+	sudo chmod 777 "$FLASHLOGPATH"
+  echo "FOUND $FLASHLOGPATH"
+  #cat $FLASHLOGPATH
   if grep -q "success: true" "$FLASHLOGPATH"; then
     exit 0
   fi
