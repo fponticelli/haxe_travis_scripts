@@ -74,13 +74,23 @@ function run_flash {
 		exit 1
 	fi
 	sudo chmod 777 "$FLASHLOGPATH"
-  echo "FOUND $FLASHLOGPATH"
+  echo -n "FOUND $FLASHLOGPATH"
+  local CODE=1
+  for i in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20; do
+    if grep -Fq "ALL TESTS OK" "$FLASHLOGPATH"
+    then
+      CODE=0
+      break
+    end
+    if grep -Fq "fail" "$FLASHLOGPATH"
+    then
+      break
+    end
+    echo -n "."
+    sleep 2
+  done
   cat "$FLASHLOGPATH"
-  grep -Fq "ALL TESTS OK" "$FLASHLOGPATH"
-  #if grep -Fq "ALL TESTS OK" "$FLASHLOGPATH"
-  #then
-  #  exit 0
-  #else
-  #  exit 1
-  #fi
+  if $CODE then
+    exit 1
+  fi
 }
