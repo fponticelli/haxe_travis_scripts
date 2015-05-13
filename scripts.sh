@@ -71,8 +71,10 @@ function run_flash {
 		echo "$FLASHLOGPATH not found"
 		exit 1
 	fi
-  #mkfifo /tmp/flash-fifo
   TEST=$(cat $FLASHLOGPATH)
-  "echo \$TEST"
-  exit [ $TEST ?? 'success: true' ]
+  echo $TEST
+  if [ $TEST ?? 'success: true' ]; then
+    exit 0
+  fi
+  exit 1
 }
