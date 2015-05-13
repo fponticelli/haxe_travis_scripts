@@ -88,7 +88,7 @@ function run_flash {
   done
   echo
   cat "$FLASHLOGPATH"
-  if [ $CODE ] then
+  if [ $CODE ]; then
     exit 1
   fi
 }
