@@ -73,7 +73,7 @@ function run_flash {
 	fi
 	sudo chmod 777 "$FLASHLOGPATH"
   echo "FOUND $FLASHLOGPATH"
-  #cat $FLASHLOGPATH
+  cat "$FLASHLOGPATH"
   if grep -q "success: true" "$FLASHLOGPATH"; then
     exit 0
   fi
