@@ -9,7 +9,7 @@ function install_hxcpp {
     haxelib install hxcpp;
   elif [[ $TRAVIS_HAXE_VERSION == "3.1.3" ]]; then
     haxelib install hxcpp 3.1.68;
-  elif
+  else
     (
       echo "unable to install hxcpp"
       exit 1
@@ -24,7 +24,7 @@ function install_hxjava {
     haxelib install hxjava;
   elif [[ $TRAVIS_HAXE_VERSION == "3.1.3" ]]; then
     haxelib install hxjava 3.1.0;
-  elif
+  else
     (
       echo "unable to install hxjava"
       exit 1
@@ -39,7 +39,7 @@ function install_hxcs {
     haxelib install hxcs;
   elif [[ $TRAVIS_HAXE_VERSION == "3.1.3" ]]; then
     haxelib install hxcs 3.1.1;
-  elif
+  else
     (
       echo "unable to install hxcs"
       exit 1
