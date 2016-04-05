@@ -11,7 +11,7 @@ function install_hxcpp {
     haxelib install hxcpp 3.1.68;
   elif
     echo "unable to install hxcpp";
-    exit(1);
+    exit 1;
   fi
 }
 
@@ -24,7 +24,7 @@ function install_hxjava {
     haxelib install hxjava 3.1.0;
   elif
     echo "unable to install hxjava";
-    exit(1);
+    exit 1;
   fi
 }
 
@@ -37,7 +37,7 @@ function install_hxcs {
     haxelib install hxcs 3.1.1;
   elif
     echo "unable to install hxcs";
-    exit(1);
+    exit 1;
   fi
 }
 
